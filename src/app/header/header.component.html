@@ -1,0 +1,51 @@
+<header class="row header">
+    <div class="col-8 heading">
+        <div class="col-6">
+            <img src="../../favicon.ico" alt="">
+
+            <!-- PROPERTY BINDING | CLASS BINDING {[class.active]="isActive"} | STYLE BINDING {[style.backgroundColor]="isActive ? 'blue' : 'grey'"} | EVENT BINDING {(click)="onSave($event)"} -->
+            <h1 [textContent]="headerText"></h1>
+            <button class="btn btn-primary" [class.active]="isActive" [style.backgroundColor]="isActive ? 'blue' : 'grey'" (click)="onSave($event)">Save</button>
+            <table>
+                <tr>
+                    <td [attr.colspan]="headerText"></td>
+                </tr>
+            </table>
+
+            <!-- EVENT BUBBLING -->
+            <div class="div1" (click)="onClickDiv1()">
+                <div class="div2" (click)="onClickDiv2()">
+                    <button class="btn btn-primary" [class.active]="isActive" [style.backgroundColor]="isActive ? 'blue' : 'grey'" (click)="onSave($event)">BubbledEvents</button>
+                </div>
+            </div>   
+
+            <!-- EVENT FILTERING -->
+            <input type="text" (keyup)="onKeyUpWithoutFilter($event)"><br>
+            <input type="text" (keyup.enter)="onKeyUpWithFilter()"><br>
+
+            <!-- TEMPLATE VARIABLES -->
+            <input type="text" (keyup.enter)="getValueOldWay($event)"><br>
+            <input #val type="text" (keyup.enter)="getValueTemplateVariable(val.value)"><br>
+
+            <!-- TWO WAY BINDING -->
+            <input [value]="emailAddress" (keyup.enter)="onEmailEnter()"> 
+            <input [value]="emailAddress" (keyup.enter)="emailAddress=$event.target.value; onEmailEnterTemporaryWay(emailAddress)">
+            <!-- As shown above, we can have multiple lines of codes in event binding or property binding -->
+            <input [(ngModel)]="email2Way" (keyup.enter)="onEmailEnter()">
+            <h1>You have entered {{email2Way}}</h1>
+
+            <!-- PIPES -->
+            {{ course.title | uppercase }} <br/>
+            {{ course.rating | number:'1.2-2' }} <br/>
+            {{ course.students | number  }} <br/>
+            {{ course.price | currency:'INR':true:'3.1-1'}} <br/>
+            {{ course.releaseDate | date:'shortDate'}} <br/>
+
+            <!-- CUSTOM PIPES -->
+            {{ summaryText | summary }}
+        </div>        
+    </div>
+    <div class="col-4 nav-bar">
+
+    </div>
+</header>

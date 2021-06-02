@@ -1,0 +1,17 @@
+<div class="row doctors doctor-list">    
+  <div class="col-3 doctor" *ngFor="let doctor of doctors">
+    <div class="card">
+      <div class="card-body tile">
+        <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
+        <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">
+        <p class="card-text"><strong>ADDRESS : </strong>{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+        <p class="card-text"><strong>PINCODE : </strong>{{ doctor.pincode }} </p>
+        <p class="card-title">
+          <strong>RATING : </strong> {{ doctor.rating }}
+        </p>
+        <a href="#" class="btn btn-primary">Contact</a>
+        <p class="card-text favorite"  [class.fav]="isFavorite" (click)="addToFavorite()" ><strong>Add to Favorite </strong><span><i class="fas fa-star"></i></span></p>
+      </div>
+    </div>
+  </div>
+</div>

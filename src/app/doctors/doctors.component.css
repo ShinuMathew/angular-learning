@@ -1,0 +1,25 @@
+.doctors {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(250, 235, 215, 0.178);
+    margin: 0;
+}
+
+.doctor {
+    margin: 60px;
+    align-items: center;
+}
+
+.tile {
+    text-align: center;
+}
+
+.favorite {
+    margin: 10px;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.fav {
+    color: gold;
+}

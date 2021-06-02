@@ -24,9 +24,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@fortawesome/fontawesome-free/js/all.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -120,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "angular-task-manager"
+  "defaultProject": "angular-task-manager",
+  "cli": {
+    "analytics": "2f9bed98-be7d-491b-854d-741acfc01ef5"
+  }
 }

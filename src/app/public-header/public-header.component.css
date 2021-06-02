@@ -1,0 +1,42 @@
+@import "~font-awesome/css/font-awesome.css";
+
+.navbar {
+    background-color: rgb(43,122,207) !important; 
+    height: 100px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    color: red;     
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;   
+      
+}
+
+.header-content>h1 {
+    padding-left: 20px;  
+    padding-right: 20px;  
+    color: white;
+}
+
+.header-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;    
+}
+
+.header-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.header-links a:hover {
+    font-size: 1.05rem;
+    color: red;
+    transition: ease-in 0.3s;
+}

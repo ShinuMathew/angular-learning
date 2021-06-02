@@ -1,0 +1,11 @@
+#textbox {
+    margin: 20px;
+    padding: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: larger;
+}
+
+#textcontent {
+    margin-left: 20px;
+}
