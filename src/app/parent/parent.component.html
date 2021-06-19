@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <!-- 2 way data binding techniques -->
+      <hr/>
+      <input class="form-control" type="text" placeholder="Withouth ngModel" [value]="withoutNgModel" (keyup)="withoutNgModelChange($event.target.value)">
+      <input class="form-control" type="text" placeholder="With ngModel" [(ngModel)]="withNgModel">
+      <h1>{{withoutNgModel}}</h1>
+      <h1>{{withNgModel}}</h1>
+      <hr/>
+
+
+      <label class="">Enter parent data</label>
+      <input
+        type="text"
+        class="form-control"
+        id="parent-ip"
+        placeholder="Parent Data"
+        #ptext (keyup)="0"
+      />
+      <!-- [(ngModel)="localText" -->
+      <label class="">Child data displayed here</label>
+      <h1>{{localText}}</h1>
+    </div>
+  </div>
+  <hr />
+  <!-- <app-child [parentText]="localText"></app-child> -->
+  <!-- <app-child [parent-text]="ptext.value" (childEvent)="displayValue($event)"></app-child> -->
+  <app-child [parent-text]="ptext.value" (child-event)="localText=$event.value"></app-child>
+  <!-- The '$event' will be passed from the child's output property's emitted value. emit(value)  
+    - "$event" object which is a built in object in angular was used to represent a DOM event object
+    - Here since the component is a custom component $event could be anythiiing passed when raising an event
+  -->
+</div>

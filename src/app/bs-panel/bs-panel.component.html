@@ -1,0 +1,10 @@
+<!-- div.panel.panel-default>div.panel-heading+div.panel-body -->
+<div class="card" style="width: 30rem; margin:50px">
+    <!-- <div class="card-header">Heading</div> -->
+    <div class="card-header">
+        <ng-content select="[heading]"></ng-content>
+    </div>
+    <div class="card-body">
+        <ng-content select="[body]"></ng-content>
+    </div>
+</div>

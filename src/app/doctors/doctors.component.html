@@ -1,6 +1,6 @@
 <div class="row doctors doctor-list">    
   <div class="col-3 doctor" *ngFor="let doctor of doctors">
-    <div class="card">
+    <div class="card h-100">
       <div class="card-body tile">
         <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
         <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">

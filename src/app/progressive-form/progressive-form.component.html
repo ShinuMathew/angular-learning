@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+      <div class="col-6">
+        <h1>Dummy Form With Search bar</h1>
+        <label class="">Enter name</label>
+        <input type="text" class="form-control" id="parent-ip" />
+        <label class="">Enter password</label>
+        <input type="password" class="form-control" id="parent-ip" />
+        <button class="btn btn-primary" (click)="onload()">Submit</button>
+        <div [style.display]="progressDisplay">
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              aria-valuenow="50"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [style.width]="progress"
+            ></div>
+          </div>
+        </div>
+  
+        <h1 [style.display]="completedDisplay" id="completed">Registration success !</h1>
+      </div>
+    </div>
+    <div class="row">
+      <h1>Parent app component</h1>
+      <label class="">Enter parent data</label>
+      <input type="text" class="form-control" id="parent-ip" placeholder="Parent Data"/>
+      <h1>Parent app component</h1>
+    </div>
+  </div>
+  

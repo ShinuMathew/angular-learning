@@ -1,0 +1,20 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.progress {
+    margin-top: 30px;
+}
+
+#parent-ip {
+
+    margin-top: 20px;
+    margin-bottom:20px
+}
+
+#completed {
+    color: green; 
+    margin-top: 20px;   
+}
+
+* {
+    color:red
+}

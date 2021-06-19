@@ -14,6 +14,17 @@ import { PublicHeaderComponent } from './public-header/public-header.component';
 import { DoctorsService } from './doctors.service';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { TileCasePipe } from './tilecase.pipe';
+import { FavoriteComponent } from './favorite/favorite.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PdpComponent } from './pdp/pdp.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
+import { ProgressiveFormComponent } from './progressive-form/progressive-form.component';
+import { BsPanelComponent } from './bs-panel/bs-panel.component';
+import { NgcontentComponent } from './ngcontent/ngcontent.component';
+import { LikeChildComponent } from './like-child/like-child.component';
+import { LikeParentComponent } from './like-parent/like-parent.component'
 
 
 @NgModule({
@@ -26,12 +37,22 @@ import { TileCasePipe } from './tilecase.pipe';
     DoctorsComponent,
     PublicHeaderComponent,
     SearchBoxComponent,
-    TileCasePipe
+    TileCasePipe,
+    FavoriteComponent,
+    PdpComponent,
+    ParentComponent,
+    ChildComponent,
+    ProgressiveFormComponent,
+    BsPanelComponent,
+    NgcontentComponent,
+    LikeChildComponent,
+    LikeParentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     CoursesService,

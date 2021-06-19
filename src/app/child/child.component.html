@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-6">
+    <label class="">Enter Child data</label>
+    <input
+      type="text"
+      class="form-control"
+      id="child-ip"
+      placeholder="Child Data"  
+      (keyup)="onTyping($event.target.value)"
+    />
+    <label class="">Parent data displayed here</label>
+    <h1>{{parentTextContent}}</h1>
+  </div>
+</div>
+<!-- Until now the data flow was within the component
+But sometime we need to pass data from parent componnent to child and vice versa
+Thus for this purpose we make use of INPUTS and OUTPUTS 
+
+INPUTS :
+  - We mark a field as input using @Input from @angular/core
+  Threfore, @Input('parentText') parentTextContent
+-->

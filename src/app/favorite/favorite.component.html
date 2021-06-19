@@ -1,0 +1,2 @@
+<h1 [textContent]="favTitle"></h1>
+<button (click)="onFavClick()" [class.active]="!isFavorite" class="btn btn-primary" [style.backgroundColor]="isFavorite ? 'blue' : 'grey'" [textContent]="status"></button>

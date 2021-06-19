@@ -1,0 +1,9 @@
+<div class="card" style="width:200px;  height:200px; margin: 50px; font-size: 30px;">
+    <div class="card-title" style="text-align:center">
+        Like Exercise
+    </div>
+    <div class="card-body" style="text-align:center; ">
+        <app-like-child [is-liked]="isLiked" (on-liked)="liked($event)"></app-like-child>
+        <h6>{{likeText}}</h6>
+    </div>
+</div>
