@@ -1,0 +1,60 @@
+.checkout {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* overflow: hidden; */
+}
+
+.checkout-container {
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.body-content {
+    padding-top: 20px;
+    padding-left: 20px
+}
+
+.body {
+    display: none;
+    border-top: 2px solid grey;
+}
+
+.show {
+    display: flex;
+    animation: appear 1s ease-in-out forwards;
+}
+
+.hide {
+    display: none;
+    animation: disappear 1s ease-in-out forwards;
+}
+
+@keyframes appear {
+    0% {
+        height: 0%;
+        opacity: 0;
+    }
+    100% {
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    0% {
+        height: 100%;
+        opacity: 1;
+    }
+    100% {
+        height: 0%;
+        opacity: 0;
+    }
+}

@@ -1,17 +1,187 @@
-<div class="row doctors doctor-list">    
-  <div class="col-3 doctor" *ngFor="let doctor of doctors">
-    <div class="card h-100">
-      <div class="card-body tile">
-        <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
-        <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">
-        <p class="card-text"><strong>ADDRESS : </strong>{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
-        <p class="card-text"><strong>PINCODE : </strong>{{ doctor.pincode }} </p>
-        <p class="card-title">
-          <strong>RATING : </strong> {{ doctor.rating }}
-        </p>
-        <a href="#" class="btn btn-primary">Contact</a>
-        <p class="card-text favorite"  [class.fav]="isFavorite" (click)="addToFavorite()" ><strong>Add to Favorite </strong><span><i class="fas fa-star"></i></span></p>
+<div class="doctor-container">
+  <div [hidden]="!isEmpty" class="search-text">
+    <h1 >Searching for doctors..</h1> 
+   </div> 
+  <div *ngIf="isEmpty then nodoctor; else doctordetails" class="doctor-container">  
+  </div>
+  
+  <ng-template #nodoctor>
+    <div class="loader">
+      <div class="loading">
+        
       </div>
     </div>
-  </div>
+  </ng-template>
+  
+  <ng-template #doctordetails>
+    <h1 class="search-text">Found {{doctors.length}} doctors near you</h1>
+    <div class="search-text">    
+      <div [hidden]="isEmpty" class="views">
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a class="nav-link" (click)="setViewMode('grid')" [class.active]="viewMode == 'grid'" href="#">Grid View</a></li>
+          <li class="nav-item"><a class="nav-link" (click)="setViewMode('list')" [class.active]="viewMode == 'list'" href="#">List View</a></li>
+        </ul>
+      </div> 
+    </div>
+    
+    <button class="search-text btn btn-primary" (click)="loadDoctors()">
+      LoadDoctors
+    </button>
+  
+    <!-- With ngSwitch and ngSwitchCase event binding derivatives -->
+    <div [ngSwitch]="viewMode">
+  
+      <div *ngSwitchCase="'grid'" class="row doctors doctor-list"> 
+        <div class="col-3 doctor" *ngFor="let doctor of doctors; trackBy: trackById">
+          <div class="card h-100">
+            <div class="card-body grid">
+              <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
+              <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">
+              <p class="card-text"><strong>ADDRESS : </strong>{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+              <p class="card-text"><strong>PINCODE : </strong>{{ doctor.pincode }} </p>
+              <p class="card-title">
+                <strong>RATING : </strong> {{ doctor.rating}}
+              </p>
+              <a href="#" class="btn btn-primary">Contact</a>
+              <div class="fav-comp">
+                <p class="card-text favorite"><strong>Add to Favorite </strong></p>
+                <p class="card-text favorite" (click)="addToFavorite(doctor.id)" [class.fav]="doctor.isFavorite"><span><i class="fas fa-star"></i></span></p>
+              </div>
+              <p class="card-text"><strong>{{doctor.degree?.bachelors}}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngSwitchCase="'list'" class="row doctors doctor-tiles">   
+        <table class="table table-striped">
+          <thead class='thead-dark'>
+            <tr>
+              <th scope="col">S.NO</th>
+              <th scope="col">PROFILE</th>
+              <th scope="col">NAME</th>
+              <th scope="col">ADDRESS</th>
+              <th scope="col">PINCODE</th>
+              <th scope="col">RATING</th>
+              <th scope="col">CONTACT</th>
+              <th scope="col">ADD TO FAVORITE</th>            
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doctor of doctors; index as i; odd as isOdd" [class.dark]="isOdd">
+              <td>
+                {{doctor.id}}
+              </td>
+              <td>
+                <img id="profile-pic" [src]="doctor.image" alt="" width="80px" height="80px">
+              </td>
+              <td>
+                <h6>{{ doctor.name | uppercase }}</h6>
+              </td>
+              <td>
+                <p class="card-text">{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+              </td>
+              <td>
+                <p class="card-text">{{ doctor.pincode }} </p>
+              </td>
+              <td>
+                <p>{{ doctor.rating }}</p>
+              </td>
+              <td>
+                <a href="#" class="btn btn-primary">Contact</a>
+              </td>
+              <td>
+                <p class="card-text favorite" [class.fav]="doctor.isFavorite" (click)="addToFavorite(doctor.id)" ><strong></strong><span><i class="fas fa-star"></i></span></p>
+              </td>
+            </tr>                    
+          </tbody>
+        </table>      
+      </div> 
+  
+      <div *ngSwitchDefault class="row doctors doctor-list"> 
+        <div class="col-3 doctor" *ngFor="let doctor of doctors">
+          <div class="card h-100">
+            <div class="card-body grid">
+              <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
+              <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">
+              <p class="card-text"><strong>ADDRESS : </strong>{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+              <p class="card-text"><strong>PINCODE : </strong>{{ doctor.pincode }} </p>
+              <p class="card-title">
+                <strong>RATING : </strong> {{ doctor.rating}}
+              </p>
+              <a href="#" class="btn btn-primary">Contact</a>
+              <p class="card-text favorite" [class.fav]="isFavorite" (click)="addToFavorite(doctor.id)" ><strong>Add to Favorite </strong><span><i class="fas fa-star"></i></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <!-- With ngIf -->
+    <!-- <div *ngIf="viewMode == 'grid' then doctorGrid; else doctorList" class="doctor-container">  
+    </div>
+    <ng-template #doctorGrid>
+      <div class="row doctors doctor-list"> 
+        <div class="col-3 doctor" *ngFor="let doctor of doctors">
+          <div class="card h-100">
+            <div class="card-body grid">
+              <h3 class="card-title">{{ doctor.name | uppercase }}</h3>
+              <img id="profile-pic" [src]="doctor.image" alt="" width="200px" height="200px">
+              <p class="card-text"><strong>ADDRESS : </strong>{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+              <p class="card-text"><strong>PINCODE : </strong>{{ doctor.pincode }} </p>
+              <p class="card-title">
+                <strong>RATING : </strong> {{ doctor.rating}}
+              </p>
+              <a href="#" class="btn btn-primary">Contact</a>
+              <p class="card-text favorite" [class.fav]="isFavorite" (click)="addToFavorite(doctor.id)" ><strong>Add to Favorite </strong><span><i class="fas fa-star"></i></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #doctorList>
+      <div class="row doctors doctor-tiles">   
+        <table class="table table-striped">
+          <thead class='thead-dark'>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">NAME</th>
+              <th scope="col">ADDRESS</th>
+              <th scope="col">PINCODE</th>
+              <th scope="col">RATING</th>
+              <th scope="col">CONTACT</th>
+              <th scope="col">ADD TO FAVORITE</th>            
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doctor of doctors">
+              <td>
+                <img id="profile-pic" [src]="doctor.image" alt="" width="80px" height="80px">
+              </td>
+              <td>
+                <h6>{{ doctor.name | uppercase }}</h6>
+              </td>
+              <td>
+                <p class="card-text">{{ doctor.address_line1 }} <br> {{doctor.address_line2 }}</p>
+              </td>
+              <td>
+                <p class="card-text">{{ doctor.pincode }} </p>
+              </td>
+              <td>
+                <p>{{ doctor.rating }}</p>
+              </td>
+              <td>
+                <a href="#" class="btn btn-primary">Contact</a>
+              </td>
+              <td>
+                <p class="card-text favorite" [class.fav]="isFavorite" (change)="checkFavorite(doctor.id)" (click)="addToFavorite(doctor.id)" ><strong></strong><span><i class="fas fa-star"></i></span></p>
+              </td>
+            </tr>                    
+          </tbody>
+        </table>      
+      </div>  
+    </ng-template> -->
+  </ng-template>
+  
 </div>

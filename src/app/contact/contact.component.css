@@ -1,0 +1,27 @@
+.contact-container {
+    height: 100vh;
+    margin: 30px;    
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.form-group button {
+    align-items: center;
+}
+
+.contact-title {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(6, 117, 182);
+    text-align: center;
+}
+
+button {
+    align-content: center;
+}

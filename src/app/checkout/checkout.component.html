@@ -1,0 +1,31 @@
+<div class="checkout">
+    <div class="container checkout-container">
+        <app-zippy (show-address)="showAddress('Shipping')" title="Shipping Address" >
+            <div class="body" [class.show]="addressDisplay == 'Shipping'" [class.hide]="addressDisplay != 'Shipping'">
+                <div class="body-content">
+                    <p class="body-subtitle"><span>Name: </span>Shinu Mathew</p>
+                    <p class="body-text"><span>Address: </span>No. 21, Jagajeevanram colony, Selaiyur</p>
+                    <p class="body-text"><span>City: </span>Chennai</p>
+                    <p class="body-text"><span>State: </span>Tamil Nadu</p>
+                    <p class="body-text"><span>PinCode: </span>600073</p>
+                    <p class="body-text"><span>Ph no.: </span>7305512909</p>
+                </div>
+            </div>            
+        </app-zippy>
+        <app-zippy (show-address)="showAddress('Billing')" title="Billing Address">    
+            <div class="body" [ngClass]="{
+                'show': addressDisplay == 'Billing',
+                'hide': addressDisplay != 'Billing'
+            }">
+                <div class="body-content">
+                    <p class="body-subtitle"><span>Name: </span>Shinu Mathew</p>
+                    <p class="body-text"><span>Address: </span>No. 21, Jagajeevanram colony, Selaiyur</p>
+                    <p class="body-text"><span>City: </span>Chennai</p>
+                    <p class="body-text"><span>State: </span>Tamil Nadu</p>
+                    <p class="body-text"><span>PinCode: </span>600073</p>
+                    <p class="body-text"><span>Ph no.: </span>7305512909</p>
+                </div>
+            </div>      
+        </app-zippy>
+    </div>
+</div>

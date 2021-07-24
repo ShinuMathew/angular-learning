@@ -7,3 +7,12 @@
  margin: 0;
  box-sizing: border-box;   
 }
+
+body {
+    /* overflow: hidden; */
+}
+
+.form-control.ng-touched.ng-invalid {
+    border: 2px solid red;
+    box-shadow: 2px red;
+}
