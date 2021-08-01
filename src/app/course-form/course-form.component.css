@@ -26,3 +26,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.alert-success {
+  transition: 2s ease;
+}

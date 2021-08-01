@@ -11,7 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { SummaryPipe } from './summary.pipe';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { PublicHeaderComponent } from './public-header/public-header.component';
-import { DoctorsService } from './doctors.service';
+import { DoctorsService } from './services/doctors.service';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { TileCasePipe } from './tilecase.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
