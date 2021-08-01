@@ -1,2 +1,3 @@
-<input type="text" [(ngModel)]="tileText" id="textbox" placeholder="Enter Text... "/>
+<!-- <input type="text" [(ngModel)]="tileText" id="textbox" placeholder="Enter Text... "/> -->
+<input type="text" [appInputFormat]="'phone'" id="textbox" placeholder="Enter Text... "/>
 <h1 id="textcontent">Formatted text : {{tileText | tilecase}}</h1>

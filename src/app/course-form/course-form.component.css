@@ -1,0 +1,39 @@
+.container {
+    height: 80vh
+}
+
+.course-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(16, 105, 156);
+  margin: 30px
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(16, 105, 156);
+}
+
+.form-group label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: rgb(16, 105, 156);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.alert-success {
+  transition: 2s ease;
+}

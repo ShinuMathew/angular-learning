@@ -1,0 +1,100 @@
+<div class="contact-container container">
+  <form action="" class="w-50" #forms="ngForm" (ngSubmit)="submit(forms)">
+    <h2 class="contact-title">Contact Us</h2>
+    <div ngModelGroup="contact" #contact="ngModelGroup">
+      <div *ngIf="!contact.valid">
+        <!-- Validations -->
+      </div>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <!-- <input required ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text" class="form-control"> -->
+        <input
+          required
+          minlength="3"
+          maxlength="25"
+          pattern="[\w\d\s_-]{5,25}"
+          ngModel
+          name="firstName"
+          #firstName="ngModel"
+          id="firstName"
+          type="text"
+          class="form-control"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="firstName.touched && !firstName.valid"
+        >
+          FirstName is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <!-- <input required ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text" class="form-control"> -->
+        <input
+          required
+          minlength="5"
+          maxlength="25"
+          pattern="[\w\d_-]{5,25}@[\w\d]{1,10}.[\w\d]{1,10}"
+          ngModel
+          name="email"
+          #email="ngModel"
+          (change)="log(email)"
+          id="email"
+          type="text"
+          class="form-control"
+        />
+        <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+          <div *ngIf="email.errors.required">Email field is required</div>
+          <div *ngIf="email.errors.minlength">
+            Email provided should be more than
+            {{ email.errors.minlength.requiredLength }} characters
+          </div>
+          <div *ngIf="email.errors.pattern">
+            Email provided doesnot fulfill the pattern
+            {{ email.errors.pattern.requiredPattern }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Comments</label>
+      <textarea
+        ngModel
+        name="comment"
+        id="comment"
+        cols="30"
+        rows="10"
+        class="form-control"
+      >
+      </textarea>
+    </div>
+    <div class="checkbox">
+      <label for=""></label>
+      <input ngModel name="isSubscribed" type="checkbox" /> Subscribe to mail
+    </div>
+    <div class="form-group">
+        <label for="contact-method">
+            Contact Method
+        </label>
+        <!-- <select multiple ngModel name="contact-method" id="contact-method" class="form-select"> -->
+        <select ngModel name="contact-method" id="contact-method" class="form-select">
+            <option></option>
+            <option *ngFor="let ops of contactMethod" [value]="ops.id">{{ops.name}}</option>
+            <!-- <option *ngFor="let ops of contactMethod" [ngValue]="ops">{{ops.name}}</option> -->
+        </select>
+    </div>
+    <div class="radio" *ngFor="let g of genders; index as i">
+        <label for="">
+            <input ngModel type="radio" name="gender" [value]="i+1">
+            {{g}}
+        </label>
+    </div>
+    <p>
+      {{ forms.value | json }}
+    </p>
+    <button [disabled]="!forms.valid" type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+</div>

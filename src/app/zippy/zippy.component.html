@@ -1,0 +1,14 @@
+<div class="zippy">
+    <div class="title-block">
+        <div class="title">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="caret" (click)="showAddress()" [class.rotate]="addressDisplay">
+            <span>
+                <i class="fas fa-caret-down"></i>
+            </span>
+        </div>
+    </div>
+    <ng-content select=".body">        
+    </ng-content>
+</div>

@@ -1,10 +1,31 @@
 <bs-panel>
-    <!-- <div heading >HEading</div> -->
-    <!-- The above will render a div with textContent as "HEading" in the ng-content. 
-        However if we only want to pass the textContent to the ng-content we can use ng-container-->
-    <ng-container heading >HEading</ng-container>
-    <div body >
-        <h2>Body</h2>
-        <p>This is body</p>
+    <!-- 
+        "ng-content" can be used to pass a content from main component to child component 
+        - We can use it by either marking the class names:
+            Consumer component : <div class="heading">Heading</div>
+            Child componenet : <ng-content select=".heading"></ng-content>
+        - The ng-content in the child component will get replaced with the div of class "heading"
+        OR
+        - We can use custom PROPERTY
+            Consumer component : <div heading >Heading</div>
+            Child componenet : <ng-content select="[heading]"></ng-content>
+    -->
+
+    <!-- 
+        "ng-container" is used to pass only the content from consumer instead of an html markup like div
+            <ng-container body >
+                <h3>Body</h3>
+                <p>Some content...</p>
+            </ng-container>
+        Therefore the <ng-content select="[body]"></ng-content> in the consumer component is replaced with 
+            <h3>Body</h3>
+            <p>Some content...</p>
+     -->
+    <div heading >
+        <h1>Heading</h1>
     </div>
+    <ng-container body >
+        <h3>Body</h3>
+        <p>Some content...</p>
+    </ng-container>
 </bs-panel>

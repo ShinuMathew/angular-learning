@@ -1,0 +1,28 @@
+.zippy {
+    width: 40vw;
+    padding: 20px;
+    border: 2px solid grey;
+
+}
+
+.title-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* border-bottom: 2px solid grey; */
+}
+
+.caret {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.body {
+    display: none;
+}
+
+.rotate {
+    transform: rotateZ(180deg);
+    transition-duration:0.5s;
+}
