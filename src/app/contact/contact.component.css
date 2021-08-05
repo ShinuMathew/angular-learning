@@ -1,6 +1,6 @@
 .contact-container {
     height: 100vh;
-    margin: 30px;    
+    margin-top: 30px;    
 }
 
 .form-group {
@@ -22,6 +22,9 @@
     text-align: center;
 }
 
-button {
-    align-content: center;
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

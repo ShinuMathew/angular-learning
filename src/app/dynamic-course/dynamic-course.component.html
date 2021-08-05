@@ -1,0 +1,15 @@
+<div class="container w-50">
+    <form>
+        <h2 class="course-title">Dynamic Course Registration</h2>
+        <div class="form-group">
+            <label for="courses">Courses</label>
+            <input type="text" id="topics" class="form-control" #topics (keyup.enter)="addTopics(topics)">
+            <ul class="list-group">
+                <div class="list-group-item topic-content" *ngFor="let topic of form.get('topics')['controls']">
+                    <div class="topic-name">{{topic.value}}</div>                    
+                    <div class="topic-remove" (click)="removeTopic(topic)"><i class="fas fa-trash-alt"></i></div>
+                </div>
+            </ul>
+        </div>
+    </form>
+</div>

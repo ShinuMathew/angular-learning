@@ -1,0 +1,35 @@
+.container {
+  min-height: 50vh;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(16, 105, 156);
+  margin: 30px
+}
+
+/* .table>tbody>tr:nth-child(2n) {
+    background-color:rgba(147, 205, 238, 0.287);
+} */
+
+.table thead {
+  text-align: center;  
+  background-color: rgb(43,122,207); 
+  color: white;
+}
+
+.table td, .table th {
+  text-align: center;   
+}
+
+.edit:hover {
+  color: rgb(0, 81, 255);
+  cursor: pointer;  
+}
+
+
+.delete:hover {
+  color: red;
+  cursor: pointer; 
+}

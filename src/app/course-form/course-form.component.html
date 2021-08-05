@@ -11,6 +11,7 @@
                 #courseId="ngModel"
                 class="form-control" 
                 placeholder="Enter Course ID"
+                pattern="[A-Z]{2}[\d]{3}"
                 (change)="log(courseId)"
                 required
                 minlength="5"
@@ -19,6 +20,7 @@
             <div class="alert alert-danger" *ngIf="courseId.touched && !courseId.valid">
                 <div *ngIf="courseId.errors.required">CourseId is required</div>
                 <div *ngIf="courseId.errors.minlength">CourseId should be minimum {{courseId.errors.minlength.requiredLength }} characters </div>
+                <div *ngIf="courseId.errors.pattern">CourseId should be of pattern 'AB123'</div>
             </div>
         </div>
         <div class="form-group">
@@ -33,8 +35,8 @@
                 aria-describedby="courseHelp" 
                 placeholder="Enter Course Name" 
                 required
-                minlength="5"
-                maxlength="15"
+                minlength="2"
+                maxlength="50"
                 >
             <div class="alert alert-danger" *ngIf="courseName.touched && !courseName.valid">
                 <div *ngIf="courseName.errors.required">CourseName is required</div>
@@ -43,33 +45,26 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="course-name">Category</label>
-            <select class="form-select" id="category" name="category" ngModel #category="ngModel" required>
+            <label for="course-name">Course Type</label>
+            <select class="form-select" id="courseType" name="category" ngModel #courseType="ngModel" required>
                 <!-- Fetch from Course service API on ngInit() -->
                 <option *ngFor="let course of courses" [ngValue]="course">{{course.description}}</option>
-                <!-- <option value="SD">Software Development</option>
-                <option value="AU">Automation</option>
-                <option value="PF">Performance Engineering</option>
-                <option value="DE">Data Engineering</option>
-                <option value="DV">Devops</option>
-                <option value="MD">Mobile Development</option>
-                <option value="ML">Machine Learning</option> -->
             </select>
-            <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
-                <div *ngIf="category.errors.required">Category is required</div>
+            <div class="alert alert-danger" *ngIf="courseType.touched && !courseType.valid">
+                <div *ngIf="courseType.errors.required">Course Type is required</div>
             </div>
         </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="consent" name="consent" ngModel #consent="ngModel" required>
             <label class="form-check-label" for="consent">I agree all <a href="#">Terms & conditions</a></label>            
         </div>
-        <div class="alert alert-warning" *ngIf="!consent.valid">( ! ) Please read and agree with the T&C to register successfully</div>
-        <!-- <div>{{formOutput}}</div> -->
+        <!-- <div class="alert alert-warning" *ngIf="!consent.valid">( ! ) Please read and agree with the T&C to register successfully</div> -->
+        <!-- <div>{{courseFormItems}}</div> -->
         <div class="form-group button">
-            <button  [disabled]="!courseForm.valid" type="submit" class="btn btn-primary">Submit</button>
+            <button [disabled]="!courseForm.valid" type="submit" class="btn btn-primary">Submit</button>
         </div>     
         <div 
-            class="alert alert-success" 
+            class="alert alert-success updateSuccess" 
             [ngClass]="{
                 'show':showSuccess,
                 'hide':!showSuccess

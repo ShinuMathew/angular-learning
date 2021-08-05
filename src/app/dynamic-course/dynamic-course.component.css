@@ -1,0 +1,35 @@
+.container {
+  height: 75vh;
+  overflow: scroll;
+}
+
+.course-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(16, 105, 156);
+  margin: 30px
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(16, 105, 156);
+}
+
+.form-group label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: rgb(16, 105, 156);
+}
+
+.topic-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topic-remove {
+    color: red;
+    cursor: pointer;
+}
