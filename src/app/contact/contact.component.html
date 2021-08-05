@@ -1,5 +1,5 @@
-<div class="contact-container container">
-  <form action="" class="w-50" #forms="ngForm" (ngSubmit)="submit(forms)">
+<div class="contact-container container w-50">
+  <form action="" #forms="ngForm" (ngSubmit)="submit(forms)">
     <h2 class="contact-title">Contact Us</h2>
     <div ngModelGroup="contact" #contact="ngModelGroup">
       <div *ngIf="!contact.valid">
@@ -90,11 +90,13 @@
             {{g}}
         </label>
     </div>
-    <p>
+    <!-- <p>
       {{ forms.value | json }}
-    </p>
-    <button [disabled]="!forms.valid" type="submit" class="btn btn-primary">
-      Submit
-    </button>
+    </p> -->
+    <div class="button form-group">
+      <button [disabled]="!forms.valid" type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </div>
   </form>
 </div>

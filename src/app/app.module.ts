@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,14 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ContactComponent } from './contact/contact.component';
 import { ZippyComponent } from './zippy/zippy.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { CourseFormComponent } from './course-form/course-form.component'
+import { CourseFormComponent } from './course-form/course-form.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { DynamicCourseComponent } from './dynamic-course/dynamic-course.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CourseListComponent } from './course-list/course-list.component'
+import { CourseService } from './services/course.service';
+import { CourseModuleComponent } from './course-module/course-module.component';
+
 
 
 @NgModule({
@@ -61,19 +69,27 @@ import { CourseFormComponent } from './course-form/course-form.component'
     ContactComponent,
     ZippyComponent,
     CheckoutComponent,
-    CourseFormComponent
+    CourseFormComponent,
+    SignUpComponent,
+    DynamicCourseComponent,
+    ChangePasswordComponent,
+    CourseListComponent,
+    CourseModuleComponent
   ],
   // All the modules, external import go here
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   // All the service classes go here
   providers: [
     CoursesService,
-    DoctorsService
+    DoctorsService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,25 @@
+<div class="container w-75">
+    <!-- <h2 class="title">List of Courses</h2> -->
+    <table class="testruns table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">CourseId</th>
+            <th scope="col">CourseName</th>
+            <th scope="col">CourseType</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{course.course_id}}</td>
+            <td>{{course.course_name}}</td>
+            <td>{{course.course_type}}</td>
+            <td class="edit"><i class="fas fa-edit" style="font-size:1rem;"></i></td>
+            <td class="delete"><i class="fas fa-trash-alt" style="font-size:1rem;"></i></td>
+          </tr>          
+        </tbody>
+      </table>
+</div>

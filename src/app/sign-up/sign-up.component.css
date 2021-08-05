@@ -1,6 +1,5 @@
 .container {
-    min-height: 50vh;
-    margin-bottom : 50px
+  height: 75vh
 }
 
 .course-title {
@@ -14,6 +13,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   color: rgb(16, 105, 156);
+  position: relative;
 }
 
 .form-group label {
@@ -28,26 +28,8 @@
   align-items: center;
 }
 
-.show {
-  display: block;
+.form-group .spinner-border {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
-.hide {
-  display: none;
-}
-
-.updateSuccess {
-  animation: disappear 3s ease-out forwards
-}
-
-@keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
