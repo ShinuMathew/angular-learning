@@ -1,2 +1,89 @@
-<app-course-form (form-updated)="setFormUpdated($event.isUpdated)"></app-course-form>
-<app-course-list [is-updated]="isUpdated"></app-course-list>
+<div class="course-module">
+    <app-course-form (form-updated)="setFormUpdated($event.isUpdated)"></app-course-form>
+    <app-course-list [is-updated]="isUpdated" (is-deleted)="notifyCourseDelete($event)" (is-update-course)="openUpdateModal($event)"></app-course-list>
+    <div class="alert alert-success course-delete-success" [@fadeInOut] *ngIf="courseDeleteSuccess">
+        Course {{deletedCourse.course_id}} : {{deletedCourse.course_name}} deleted successfully
+    </div>
+    <div class="container-fluid" id="updateCoursemodal" *ngIf="showUpdateModal">
+        <div class="container w-50 update-course">
+            <form action="" #courseForm="ngForm" class="update-course-form" (ngSubmit)="updateCourse(courseForm)">
+                <h2 class="course-title" data-cy="course-header-text">Update Course</h2>
+                <div class="form-group w-75">
+                    <label for="courseId">Course ID</label>
+                    <input 
+                        type="text" 
+                        id="courseId" 
+                        name="courseId"                        
+                        ngModel
+                        #courseId="ngModel"
+                        class="form-control" 
+                        placeholder="Enter Course ID"
+                        pattern="[A-Z]{2}[\d]{3}"                        
+                        required
+                        minlength="5"
+                        maxlength="7"
+                        data-cy="course-id"                        
+                    >
+                    <div class="alert alert-danger" *ngIf="courseId.touched && !courseId.valid">
+                        <div *ngIf="courseId.errors.required">CourseId is required</div>
+                        <div *ngIf="courseId.errors.minlength">CourseId should be minimum {{courseId.errors.minlength.requiredLength }} characters </div>
+                        <div *ngIf="courseId.errors.pattern">CourseId should be of pattern 'AB123'</div>
+                    </div>
+                </div>
+                <div class="form-group w-75">
+                    <label for="course-name">Course Name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        ngModel 
+                        name="courseName" 
+                        id="courseName" 
+                        #courseName="ngModel" 
+                        aria-describedby="courseHelp" 
+                        placeholder="Enter Course Name" 
+                        required
+                        minlength="2"
+                        maxlength="50"
+                        data-cy="course-name"
+                    >
+                    <div class="alert alert-danger" *ngIf="courseName.touched && !courseName.valid">
+                        <div *ngIf="courseName.errors.required">CourseName is required</div>
+                        <div *ngIf="courseName.errors.maxlength">CourseName should be of minlength {{courseName.errors.maxlength.requiredLength}}</div>
+                        <div *ngIf="courseName.errors.minlength">CourseName should be of maxlength {{courseName.errors.minlength.requiredLength}}</div>
+                    </div>
+                </div>
+                <div class="form-group w-75">
+                    <label for="course-name">Course Type</label>
+                    <select class="form-select" id="courseType" name="category" ngModel #courseType="ngModel" required data-cy="course-type">
+                        <!-- Fetch from Course service API on ngInit() -->
+                        <option *ngFor="let course of courses" [ngValue]="course">{{course.description}}</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="courseType.touched && !courseType.valid">
+                        <div *ngIf="courseType.errors.required">Course Type is required</div>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="consent" name="consent" ngModel #consent="ngModel" required data-cy="consent-checkbox">
+                    <label class="form-check-label" for="consent">I agree all <a href="#">Terms & conditions</a></label>            
+                </div>
+                <!-- <div class="alert alert-warning" *ngIf="!consent.valid">( ! ) Please read and agree with the T&C to register successfully</div> -->
+                <!-- <div>{{courseFormItems}}</div> -->
+                <div class="form-group button w-75">
+                    <button [disabled]="!courseForm.valid" type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-secondary" (click)="closeUpdateModal()">Cancel</button>
+                </div>     
+                <div 
+                    class="alert alert-success updateSuccess" [@fadeInOut] *ngIf="showSuccess"           
+                    role="alert">
+                    <span><i class="fas fa-check" style="font-size:2rem"></i></span> Course {{registeredCourse}} registered successfully
+                </div>   
+            
+                <div 
+                    class="alert alert-danger updateFailed" [@fadeInOut] *ngIf="showFailed"
+                    role="alert">
+                    <span><i class="fas fa-times" style="font-size:2rem"></i></span>  Failed to update course. Please check the details added.
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
