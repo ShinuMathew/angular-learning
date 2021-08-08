@@ -18,8 +18,15 @@
             <td>{{course.course_name}}</td>
             <td>{{course.course_type}}</td>
             <td class="edit"><i class="fas fa-edit" style="font-size:1rem;"></i></td>
-            <td class="delete"><i class="fas fa-trash-alt" style="font-size:1rem;"></i></td>
-          </tr>          
+            <td class="delete" (click)="deleteCourse(course)"><i class="fas fa-trash-alt" style="font-size:1rem;"></i></td>
+          </tr>   
         </tbody>
       </table>
+
+      <div class="course-error" *ngIf="courseLoadError">
+        <h4>An unexpected error occurred while loading your courses. Please try again after sometime.</h4>
+      </div>  
+      <div class="course-empty" *ngIf="courseEmpty">
+        <h4>No registered course found</h4>
+      </div>     
 </div>

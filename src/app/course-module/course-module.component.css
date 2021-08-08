@@ -1,0 +1,19 @@
+.course-delete-success {
+    position: fixed;
+    right: 50px;
+    top: 20px;
+    animation: disappear 3s ease-out forwards;
+  }
+
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

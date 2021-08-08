@@ -1,5 +1,6 @@
 .container {
   min-height: 50vh;
+  position: relative;
 }
 
 .title {
@@ -14,22 +15,33 @@
 } */
 
 .table thead {
-  text-align: center;  
-  background-color: rgb(43,122,207); 
+  text-align: center;
+  background-color: rgb(43, 122, 207);
   color: white;
 }
 
-.table td, .table th {
-  text-align: center;   
+.table td,
+.table th {
+  text-align: center;
 }
 
 .edit:hover {
   color: rgb(0, 81, 255);
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 
 .delete:hover {
   color: red;
-  cursor: pointer; 
+  cursor: pointer;
+}
+
+.course-error {
+  color: rgb(233, 35, 35);
+  text-align: center;
+}
+
+.course-empty {
+  color: blue;
+  text-align: center;
 }

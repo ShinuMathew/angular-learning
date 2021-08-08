@@ -1,6 +1,6 @@
 <div class="container w-50">
     <form action="" #courseForm="ngForm" (ngSubmit)="registerCourse(courseForm)">
-        <h2 class="course-title">Course Registration</h2>
+        <h2 class="course-title" data-cy="course-header-text">Course Registration</h2>
         <div class="form-group">
             <label for="courseId">Course ID</label>
             <input 
@@ -16,6 +16,7 @@
                 required
                 minlength="5"
                 maxlength="7"
+                data-cy="course-id"
                 >
             <div class="alert alert-danger" *ngIf="courseId.touched && !courseId.valid">
                 <div *ngIf="courseId.errors.required">CourseId is required</div>
@@ -37,6 +38,7 @@
                 required
                 minlength="2"
                 maxlength="50"
+                data-cy="course-name"
                 >
             <div class="alert alert-danger" *ngIf="courseName.touched && !courseName.valid">
                 <div *ngIf="courseName.errors.required">CourseName is required</div>
@@ -46,7 +48,7 @@
         </div>
         <div class="form-group">
             <label for="course-name">Course Type</label>
-            <select class="form-select" id="courseType" name="category" ngModel #courseType="ngModel" required>
+            <select class="form-select" id="courseType" name="category" ngModel #courseType="ngModel" required data-cy="course-type">
                 <!-- Fetch from Course service API on ngInit() -->
                 <option *ngFor="let course of courses" [ngValue]="course">{{course.description}}</option>
             </select>
@@ -55,7 +57,7 @@
             </div>
         </div>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="consent" name="consent" ngModel #consent="ngModel" required>
+            <input type="checkbox" class="form-check-input" id="consent" name="consent" ngModel #consent="ngModel" required data-cy="consent-checkbox">
             <label class="form-check-label" for="consent">I agree all <a href="#">Terms & conditions</a></label>            
         </div>
         <!-- <div class="alert alert-warning" *ngIf="!consent.valid">( ! ) Please read and agree with the T&C to register successfully</div> -->
@@ -64,13 +66,15 @@
             <button [disabled]="!courseForm.valid" type="submit" class="btn btn-primary">Submit</button>
         </div>     
         <div 
-            class="alert alert-success updateSuccess" 
-            [ngClass]="{
-                'show':showSuccess,
-                'hide':!showSuccess
-            }" 
+            class="alert alert-success updateSuccess" [@fadeInOut] *ngIf="showSuccess"           
             role="alert">
-            Course {{registeredCourse}} registered successfully
+            <span><i class="fas fa-check" style="font-size:2rem"></i></span> Course {{registeredCourse}} registered successfully
         </div>   
+        
+        <div 
+            class="alert alert-danger updateFailed" [@fadeInOut] *ngIf="showFailed"
+            role="alert">
+            <span><i class="fas fa-times" style="font-size:2rem"></i></span>  Failed to update course. Please check the details added.
+        </div>
     </form>
 </div>

@@ -1,2 +1,5 @@
 <app-course-form (form-updated)="setFormUpdated($event.isUpdated)"></app-course-form>
-<app-course-list [is-updated]="isUpdated"></app-course-list>
+<app-course-list [is-updated]="isUpdated" (is-deleted)="notifyCourseDelete($event)"></app-course-list>
+<div class="alert alert-success course-delete-success" [@fadeInOut] *ngIf="courseDeleteSuccess">
+    Course {{deletedCourse.course_id}} : {{deletedCourse.course_name}} deleted successfully
+</div>

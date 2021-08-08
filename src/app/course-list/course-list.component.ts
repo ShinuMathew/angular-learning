@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Course } from '../model/course';
 import { CourseService } from '../services/course.service';
 
@@ -10,19 +10,48 @@ import { CourseService } from '../services/course.service';
 })
 export class CourseListComponent implements OnInit {
 
-  @Input('is-updated') isUpdated : boolean;
+  @Input('is-updated') isUpdated: boolean;
+  @Output('is-deleted') isDeleted: EventEmitter<Course> = new EventEmitter<Course>();
 
+  public courseLoadError: boolean;
+  public courseDeleteSuccess: boolean;
+  public courseEmpty: boolean;
+  public deletedCourse: Course;
+  public courses: Course[];
 
-  public courses : Course[];
-  constructor(public courseService: CourseService) {     
+  constructor(public courseService: CourseService) {
+    this.courseLoadError = false
+    this.courseDeleteSuccess = false
+    this.courseEmpty = false
   }
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]);       
+    this.courseService.getCourses().subscribe(courses => {
+      this.courses = courses as Course[]
+      if (this.courses.length == 0)
+        this.courseEmpty = true
+    }, error => {
+      console.error(`ERROR=======>\n${error}`)
+      if (error) {
+        console.error(`ERROR=======>\n${error}`)
+        this.courseLoadError = true
+      }
+    });
   }
 
-  updateCourse() {    
-    this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]); 
+  updateCourse() {
+    this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]);
   }
 
+  deleteCourse(course) {
+    this.courseService.deleteCourse(course.course_id).subscribe(res => {
+      this.ngOnInit()
+      console.log('IsDeleted notification emitted')
+      this.isDeleted.emit(course)      
+      this.courseDeleteSuccess = true
+      setTimeout(() => {
+        this.courseDeleteSuccess = false
+      }, 2000)
+    })
+  }
 }

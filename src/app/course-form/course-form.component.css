@@ -28,14 +28,7 @@
   align-items: center;
 }
 
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
-
-.updateSuccess {
+.updateSuccess, .updateFailed {
   animation: disappear 3s ease-out forwards
 }
 
@@ -51,3 +44,19 @@
   }
 }
 
+
+.updateFailed {    
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.updateSuccess {  
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.updateFailed span, .updateSuccess span {
+  margin-right: 15px;
+}

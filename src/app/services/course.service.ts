@@ -19,6 +19,10 @@ export class CourseService {
   }
  
   public registerCourse(course) {    
-    return this.http.post(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}`, course)   
+    return this.http.post(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}`, course)
+  }
+
+  public deleteCourse(courseId) { 
+    return this.http.delete(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}/${courseId}`, )
   }
 }
