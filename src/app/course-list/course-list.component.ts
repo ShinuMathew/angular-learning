@@ -12,6 +12,7 @@ export class CourseListComponent implements OnInit {
 
   @Input('is-updated') isUpdated: boolean;
   @Output('is-deleted') isDeleted: EventEmitter<Course> = new EventEmitter<Course>();
+  @Output('is-update-course') isUpdateCourse: EventEmitter<Course> = new EventEmitter<Course>();
 
   public courseLoadError: boolean;
   public courseDeleteSuccess: boolean;
@@ -39,7 +40,7 @@ export class CourseListComponent implements OnInit {
     });
   }
 
-  updateCourse() {
+  refreshCourse() {
     this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]);
   }
 
@@ -47,11 +48,16 @@ export class CourseListComponent implements OnInit {
     this.courseService.deleteCourse(course.course_id).subscribe(res => {
       this.ngOnInit()
       console.log('IsDeleted notification emitted')
-      this.isDeleted.emit(course)      
+      this.isDeleted.emit(course)
       this.courseDeleteSuccess = true
       setTimeout(() => {
         this.courseDeleteSuccess = false
       }, 2000)
     })
   }
+
+  updateCourse(course) {
+    this.isUpdateCourse.emit(course)
+  }
+
 }

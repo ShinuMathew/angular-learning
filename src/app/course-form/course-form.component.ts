@@ -31,7 +31,7 @@ export class CourseFormComponent implements OnInit {
   public showFailed: boolean;
   public courses: Course[];
 
-  constructor(public coursesService: CoursesService, public courseService: CourseService) {  
+  constructor(public courseService: CourseService) {  
       this.showSuccess = false;
       this.showFailed = false;
   }

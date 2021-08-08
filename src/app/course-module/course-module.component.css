@@ -1,19 +1,120 @@
+.course-module {
+  position: relative;
+}
+
 .course-delete-success {
-    position: fixed;
-    right: 50px;
-    top: 20px;
-    animation: disappear 3s ease-out forwards;
-  }
+  position: fixed;
+  right: 50px;
+  top: 20px;
+  animation: disappear 3s ease-out forwards;
+}
 
 
 @keyframes disappear {
   0% {
     opacity: 1;
   }
+
   75% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
+}
+
+#updateCoursemodal {
+  position: fixed;
+  background-color: rgba(17, 1, 1, 0.322);
+  height: 100vh;
+  width: 100vw;
+  top: -1px;
+}
+
+.update-course {
+  position: absolute;
+  background-color: white;
+  top: 200px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 60vh;
+  padding: 20px;
+  margin-bottom: 50px;
+  z-index: 999;
+  border-radius: 10px;
+  overflow: scroll;
+}
+
+.update-course-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.course-title {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(16, 105, 156);
+  margin: 10px
+}
+
+.form-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgb(16, 105, 156);
+}
+
+
+.form-group label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: rgb(16, 105, 156);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.updateSuccess,
+.updateFailed {
+  animation: disappear 3s ease-out forwards
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.updateFailed {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.updateSuccess {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.updateFailed span,
+.updateSuccess span {
+  margin-right: 15px;
 }

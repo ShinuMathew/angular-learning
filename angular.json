@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/@fortawesome/fontawesome-free/js/all.min.js"              
+              "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"          
             ]
           },
           "configurations": {

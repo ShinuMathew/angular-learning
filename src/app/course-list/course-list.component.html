@@ -17,7 +17,7 @@
             <td>{{course.course_id}}</td>
             <td>{{course.course_name}}</td>
             <td>{{course.course_type}}</td>
-            <td class="edit"><i class="fas fa-edit" style="font-size:1rem;"></i></td>
+            <td class="edit" (click)="updateCourse(course)" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit" style="font-size:1rem;"></i></td>
             <td class="delete" (click)="deleteCourse(course)"><i class="fas fa-trash-alt" style="font-size:1rem;"></i></td>
           </tr>   
         </tbody>
@@ -28,5 +28,6 @@
       </div>  
       <div class="course-empty" *ngIf="courseEmpty">
         <h4>No registered course found</h4>
-      </div>     
+      </div> 
+     
 </div>
