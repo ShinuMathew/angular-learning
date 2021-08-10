@@ -13,6 +13,7 @@ export class CourseListComponent implements OnInit {
   @Input('is-updated') isUpdated: boolean;
   @Output('is-deleted') isDeleted: EventEmitter<Course> = new EventEmitter<Course>();
   @Output('is-update-course') isUpdateCourse: EventEmitter<Course> = new EventEmitter<Course>();
+  @Output('show-delete-modal') showDeleteModal: EventEmitter<Course> = new EventEmitter<Course>();
 
   public courseLoadError: boolean;
   public courseDeleteSuccess: boolean;
@@ -42,6 +43,10 @@ export class CourseListComponent implements OnInit {
 
   refreshCourse() {
     this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]);
+  }
+
+  triggerDeleteModalOpen(course) {
+    this.showDeleteModal.emit(course)
   }
 
   deleteCourse(course) {

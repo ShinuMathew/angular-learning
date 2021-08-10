@@ -74,7 +74,7 @@
         <div 
             class="alert alert-danger updateFailed" [@fadeInOut] *ngIf="showFailed"
             role="alert">
-            <span><i class="fas fa-times" style="font-size:2rem"></i></span>  Failed to update course. Please check the details added.
+            <span><i class="fas fa-times" style="font-size:2rem"></i></span>  Update Failed. {{failureMessage}}
         </div>
     </form>
 </div>
