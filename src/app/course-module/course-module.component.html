@@ -1,12 +1,17 @@
 <div class="course-module">
     <app-course-form (form-updated)="setFormUpdated($event.isUpdated)"></app-course-form>
-    <app-course-list [is-updated]="isUpdated" (is-deleted)="notifyCourseDelete($event)" (is-update-course)="openUpdateModal($event)"></app-course-list>
+    <app-course-list 
+        [is-updated]="isUpdated" 
+        (is-deleted)="notifyCourseDelete($event)" 
+        (is-update-course)="openUpdateModal($event)"
+        (show-delete-modal)="openDeleteModal($event)"        
+    ></app-course-list>
     <div class="alert alert-success course-delete-success" [@fadeInOut] *ngIf="courseDeleteSuccess">
         Course {{deletedCourse.course_id}} : {{deletedCourse.course_name}} deleted successfully
     </div>
     <div class="container-fluid" id="updateCoursemodal" *ngIf="showUpdateModal">
         <div class="container w-50 update-course">
-            <form action="" #courseForm="ngForm" class="update-course-form" (ngSubmit)="updateCourse(courseForm)">
+            <form action="" #courseUpdateForm="ngForm" class="update-course-form" (ngSubmit)="updateCourse(courseUpdateForm)">
                 <h2 class="course-title" data-cy="course-header-text">Update Course</h2>
                 <div class="form-group w-75">
                     <label for="courseId">Course ID</label>
@@ -22,7 +27,9 @@
                         required
                         minlength="5"
                         maxlength="7"
-                        data-cy="course-id"                        
+                        data-cy="course-id"
+                        disabled    
+                        [(ngModel)]=courseIdVal                                                           
                     >
                     <div class="alert alert-danger" *ngIf="courseId.touched && !courseId.valid">
                         <div *ngIf="courseId.errors.required">CourseId is required</div>
@@ -45,6 +52,7 @@
                         minlength="2"
                         maxlength="50"
                         data-cy="course-name"
+                        [(ngModel)]=courseNameVal
                     >
                     <div class="alert alert-danger" *ngIf="courseName.touched && !courseName.valid">
                         <div *ngIf="courseName.errors.required">CourseName is required</div>
@@ -54,7 +62,15 @@
                 </div>
                 <div class="form-group w-75">
                     <label for="course-name">Course Type</label>
-                    <select class="form-select" id="courseType" name="category" ngModel #courseType="ngModel" required data-cy="course-type">
+                    <select 
+                        class="form-select" 
+                        id="courseType" 
+                        name="category" 
+                        ngModel 
+                        #courseType="ngModel" 
+                        required data-cy="course-type"
+                        [(ngModel)]=courseTypeVal
+                        >                        
                         <!-- Fetch from Course service API on ngInit() -->
                         <option *ngFor="let course of courses" [ngValue]="course">{{course.description}}</option>
                     </select>
@@ -69,7 +85,7 @@
                 <!-- <div class="alert alert-warning" *ngIf="!consent.valid">( ! ) Please read and agree with the T&C to register successfully</div> -->
                 <!-- <div>{{courseFormItems}}</div> -->
                 <div class="form-group button w-75">
-                    <button [disabled]="!courseForm.valid" type="submit" class="btn btn-primary">Update</button>
+                    <button [disabled]="!courseUpdateForm.valid" type="submit" class="btn btn-primary">Update</button>
                     <button type="submit" class="btn btn-secondary" (click)="closeUpdateModal()">Cancel</button>
                 </div>     
                 <div 
@@ -86,4 +102,21 @@
             </form>
         </div>
     </div>
+
+    <!-- 
+            Change to Reactive forms
+        - Update should prepopulate the fields with previous value
+        - Update Form should first check if the updated courseId already exists apart from the actual courseId
+    -->
+
+    <div class="container-fluid" id="deleteCoursemodal"*ngIf="showDeleteModal" >        
+        <div class="container w-25 delete-course">
+            <h4>Are you sure you want to delete course : {{courseIdVal}}</h4>
+            <div class="deciders">
+                <button type="submit" class="btn btn-primary" (click)="sendDeleteConfirm()">Yes</button>
+                <button type="submit" class="btn btn-secondary" (click)="closeDelelteModal()">No</button>
+            </div>
+        </div>
+    </div>
+
 </div>

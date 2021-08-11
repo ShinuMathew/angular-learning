@@ -24,7 +24,8 @@
   }
 }
 
-#updateCoursemodal {
+#updateCoursemodal,
+#deleteCoursemodal {
   position: fixed;
   background-color: rgba(17, 1, 1, 0.322);
   height: 100vh;
@@ -32,7 +33,8 @@
   top: -1px;
 }
 
-.update-course {
+.update-course,
+.delete-course {
   position: absolute;
   background-color: white;
   top: 200px;
@@ -46,6 +48,30 @@
   z-index: 999;
   border-radius: 10px;
   overflow: scroll;
+}
+
+.update-course {
+  height: 60vh;
+}
+
+.delete-course {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.delete-course {
+  text-align: center;
+}
+
+.delete-course>.deciders {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between !important;
 }
 
 .update-course-form {

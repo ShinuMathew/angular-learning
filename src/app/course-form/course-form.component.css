@@ -49,12 +49,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  text-align: center;
 }
 
 .updateSuccess {  
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  text-align: center;
 }
 
 .updateFailed span, .updateSuccess span {

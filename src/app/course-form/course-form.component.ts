@@ -2,7 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 import { Course } from '../model/courses';
 import { CourseService } from '../services/course.service';
-import {style, state, animate, transition, trigger} from '@angular/animations';
+import { style, state, animate, transition, trigger } from '@angular/animations';
+import Errors from '../common/errors/errors.js';
 
 @Component({
   selector: 'app-course-form',
@@ -11,11 +12,11 @@ import {style, state, animate, transition, trigger} from '@angular/animations';
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
-        style({opacity:0}),
-        animate(1000, style({opacity:1})) 
+        style({ opacity: 0 }),
+        animate(1000, style({ opacity: 1 }))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
-        animate(1000, style({opacity:0})) 
+        animate(1000, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -30,14 +31,15 @@ export class CourseFormComponent implements OnInit {
   public showSuccess: boolean;
   public showFailed: boolean;
   public courses: Course[];
+  public failureMessage: string;
 
-  constructor(public courseService: CourseService) {  
-      this.showSuccess = false;
-      this.showFailed = false;
+  constructor(public courseService: CourseService) {
+    this.showSuccess = false;
+    this.showFailed = false;
   }
 
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.courseService.getCourseTypes().subscribe(courses => this.courses = courses as Course[]);
   }
 
@@ -61,11 +63,15 @@ export class CourseFormComponent implements OnInit {
         this.showSuccess = false
         courseForm.reset();
       }, 3000)
-    }, error => {
+    }, (error: Response) => {
       this.showFailed = true;
+      console.log(error.status)
+      console.log(error['error']['error'])
+      if (error.status === 400 && error['error']['error'] === "CourseAlreadyRegistered")
+        this.failureMessage = Errors.COURSEALREADYREGISTERED.message.replace('${courseId}', courseForm.value.courseId)
       setTimeout(() => {
-        this.showFailed = false        
-      }, 3000)
+        this.showFailed = false
+      }, 5000)
     })
   }
 
