@@ -1,24 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { SummaryPipe } from './summary.pipe';
+import { TileCasePipe } from './tilecase.pipe';
+
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses/courses.component';
-import { CoursesService } from './courses/courses.service';
 import { AuthorsComponent } from './authors/authors.component';
 import { HeaderComponent } from './header/header.component';
-import { SummaryPipe } from './summary.pipe';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { PublicHeaderComponent } from './public-header/public-header.component';
-import { DoctorsService } from './services/doctors.service';
 import { SearchBoxComponent } from './search-box/search-box.component';
-import { TileCasePipe } from './tilecase.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PdpComponent } from './pdp/pdp.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
@@ -38,10 +36,15 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { DynamicCourseComponent } from './dynamic-course/dynamic-course.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CourseListComponent } from './course-list/course-list.component'
-import { CourseService } from './services/course.service';
 import { CourseModuleComponent } from './course-module/course-module.component';
 
-
+import { CourseService } from './services/course.service';
+import { DoctorsService } from './services/doctors.service';
+import { CourseTypeService } from './services/course-type.service';
+import { AppErrorHandler } from './common/errors/app-error-handler';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { GithubUsersComponent } from './github-users/github-users.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   // All the component, pipe and directives go here
@@ -75,7 +78,10 @@ import { CourseModuleComponent } from './course-module/course-module.component';
     DynamicCourseComponent,
     ChangePasswordComponent,
     CourseListComponent,
-    CourseModuleComponent
+    CourseModuleComponent,
+    GithubFollowersComponent,
+    GithubUsersComponent,
+    NotFoundComponent
   ],
   // All the modules, external import go here
   imports: [
@@ -89,9 +95,13 @@ import { CourseModuleComponent } from './course-module/course-module.component';
   ],
   // All the service classes go here
   providers: [
-    CoursesService,
     DoctorsService,
-    CourseService
+    CourseService,
+    CourseTypeService,
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })

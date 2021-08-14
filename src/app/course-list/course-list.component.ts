@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AppError } from '../common/errors/app-error';
+import { UnexpectedError } from '../common/errors/app-errors/unexpected-error';
 import { Course } from '../model/course';
 import { CourseService } from '../services/course.service';
+import { NO_COURSE_FOUND, UNEXPECTED_ERROR } from '../common/errors/errors'
 
 @Component({
   selector: 'app-course-list',
@@ -20,6 +23,7 @@ export class CourseListComponent implements OnInit {
   public courseEmpty: boolean;
   public deletedCourse: Course;
   public courses: Course[];
+  public errorMessage: string;
 
   constructor(public courseService: CourseService) {
     this.courseLoadError = false
@@ -28,21 +32,22 @@ export class CourseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe(courses => {
-      this.courses = courses as Course[]
-      if (this.courses.length == 0)
-        this.courseEmpty = true
-    }, error => {
-      console.error(`ERROR=======>\n${error}`)
-      if (error) {
-        console.error(`ERROR=======>\n${error}`)
-        this.courseLoadError = true
-      }
-    });
+    this.loadCourses()
   }
 
-  refreshCourse() {
-    this.courseService.getCourses().subscribe(courses => this.courses = courses as Course[]);
+  loadCourses() {
+    this.courseService.getCourses().subscribe(courses => {
+      this.courses = courses as Course[]
+      if (this.courses.length == 0) {
+        this.courseEmpty = true
+        this.errorMessage = NO_COURSE_FOUND.message
+      }        
+    }, (error: AppError) => {
+      if (error instanceof UnexpectedError) {
+        this.courseLoadError = true
+        this.errorMessage = UNEXPECTED_ERROR.message
+      }
+    });
   }
 
   triggerDeleteModalOpen(course) {
@@ -52,12 +57,9 @@ export class CourseListComponent implements OnInit {
   deleteCourse(course) {
     this.courseService.deleteCourse(course.course_id).subscribe(res => {
       this.ngOnInit()
-      console.log('IsDeleted notification emitted')
       this.isDeleted.emit(course)
       this.courseDeleteSuccess = true
-      setTimeout(() => {
-        this.courseDeleteSuccess = false
-      }, 2000)
+      setTimeout(() => this.courseDeleteSuccess = false, 2000)
     })
   }
 

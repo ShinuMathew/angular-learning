@@ -3,11 +3,15 @@
     <app-course-list 
         [is-updated]="isUpdated" 
         (is-deleted)="notifyCourseDelete($event)" 
+        (is-updated)="notifyCourseUpdate($event)" 
         (is-update-course)="openUpdateModal($event)"
         (show-delete-modal)="openDeleteModal($event)"        
     ></app-course-list>
     <div class="alert alert-success course-delete-success" [@fadeInOut] *ngIf="courseDeleteSuccess">
         Course {{deletedCourse.course_id}} : {{deletedCourse.course_name}} deleted successfully
+    </div>
+    <div class="alert alert-success course-update-success" [@fadeInOut] *ngIf="courseUpdateSuccess">
+        Course {{updatedCourse.course_id}} : {{updatedCourse.course_name}} updated successfully
     </div>
     <div class="container-fluid" id="updateCoursemodal" *ngIf="showUpdateModal">
         <div class="container w-50 update-course">

@@ -2,31 +2,32 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { COURSE, COURSE_TYPE } from '../core/constants/api';
+import { Observable} from 'rxjs';
+import { DataService } from './data.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
+export class CourseService extends DataService{
 
-  constructor(public http: HttpClient) { }
-
-  public getCourseTypes() {    
-    return this.http.get(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE_TYPE}`)   
+  constructor(http: HttpClient) { 
+    super(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}`, http);
   }
 
-  public getCourses() {    
-    return this.http.get(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}`)   
-  }
- 
-  public registerCourse(course) {    
-    return this.http.post(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}`, course)
-  }
- 
-  public updateCourse(courseId, course) {    
-    return this.http.put(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}/${courseId}`, course)
+  public getCourses(): Observable<any> {
+    return super.getAll();
   }
 
-  public deleteCourse(courseId) { 
-    return this.http.delete(`${environment.protocol}://${environment.domain}:${environment.port}${COURSE}/${courseId}`, )
+  public registerCourse(course): Observable<any> {
+    return super.post(course);
+  }
+
+  public updateCourse(courseId, course): Observable<any> {
+    return super.put(courseId, course);
+  }
+
+  public deleteCourse(courseId): Observable<any> {
+    return super.delete(courseId);
   }
 }

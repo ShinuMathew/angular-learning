@@ -62,3 +62,7 @@
 .updateFailed span, .updateSuccess span {
   margin-right: 15px;
 }
+
+.consent-check input, .consent-check label {
+  cursor: pointer;
+}

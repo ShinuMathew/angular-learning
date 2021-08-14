@@ -3,7 +3,11 @@ import { CoursesService } from '../services/courses.service';
 import { Course } from '../model/courses';
 import { CourseService } from '../services/course.service';
 import { style, state, animate, transition, trigger } from '@angular/animations';
-import Errors from '../common/errors/errors.js';
+import { COURSE_ALREADY_REGISTERED } from '../common/errors/errors';
+import { AppError } from '../common/errors/app-error';
+import { NotFoundError } from '../common/errors/app-errors/not-found-error';
+import { BadRequestError } from '../common/errors/app-errors/bad-request-error';
+import { CourseTypeService } from '../services/course-type.service';
 
 @Component({
   selector: 'app-course-form',
@@ -26,25 +30,19 @@ export class CourseFormComponent implements OnInit {
   @Output('form-updated') formUpdated: EventEmitter<object> = new EventEmitter();
 
   public formOutput: object;
-  public registeredCourse: string;
-  public courseFormItems: string;
+  public registeredCourse: string;  
   public showSuccess: boolean;
   public showFailed: boolean;
   public courses: Course[];
   public failureMessage: string;
 
-  constructor(public courseService: CourseService) {
+  constructor(public courseService: CourseService, public courseTypeService: CourseTypeService) {
     this.showSuccess = false;
     this.showFailed = false;
   }
 
-
   ngOnInit(): void {
-    this.courseService.getCourseTypes().subscribe(courses => this.courses = courses as Course[]);
-  }
-
-  log(field) {
-    console.log(field)
+    this.courseTypeService.getCourseTypes().subscribe(courses => this.courses = courses as Course[]);
   }
 
   registerCourse(courseForm) {
@@ -54,25 +52,15 @@ export class CourseFormComponent implements OnInit {
       course_type: courseForm.value.category.description,
       consent: courseForm.value.consent
     }
-    this.courseFormItems = JSON.stringify(this.formOutput)
     this.courseService.registerCourse(this.formOutput).subscribe(course => {
       this.registeredCourse = courseForm.value.courseName
       this.showSuccess = true;
       this.formUpdated.emit({ isUpdated: true })
-      setTimeout(() => {
-        this.showSuccess = false
-        courseForm.reset();
-      }, 3000)
-    }, (error: Response) => {
+      setTimeout(() => courseForm.reset(), 3000)
+    }, (error: AppError) => {
       this.showFailed = true;
-      console.log(error.status)
-      console.log(error['error']['error'])
-      if (error.status === 400 && error['error']['error'] === "CourseAlreadyRegistered")
-        this.failureMessage = Errors.COURSEALREADYREGISTERED.message.replace('${courseId}', courseForm.value.courseId)
-      setTimeout(() => {
-        this.showFailed = false
-      }, 5000)
+      if (error instanceof BadRequestError && error.getErrorMessage() === "CourseAlreadyRegistered")
+        this.failureMessage = COURSE_ALREADY_REGISTERED.message.replace('${courseId}', courseForm.value.courseId)
     })
   }
-
 }
