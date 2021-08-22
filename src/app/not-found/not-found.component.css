@@ -1,0 +1,21 @@
+.error-div {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+.error-banner {
+    margin-top: 30px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+   
+}
+.error-banner img {
+    height: 50vh;
+    width: auto;
+}

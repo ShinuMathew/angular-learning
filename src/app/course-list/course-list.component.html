@@ -24,10 +24,10 @@
       </table>
 
       <div class="course-error" *ngIf="courseLoadError">
-        <h4>An unexpected error occurred while loading your courses. Please try again after sometime.</h4>
+        <h4>{{errorMessage}}</h4>
       </div>  
       <div class="course-empty" *ngIf="courseEmpty">
-        <h4>No registered course found</h4>
+        <h4>{{errorMessage}}</h4>
       </div> 
      
 </div>

@@ -1,0 +1,56 @@
+<div class="container user-profile w-75">
+    <!-- <h1>{{userProfile.name || userProfile.login}}</h1> -->
+    <img [src]="userProfile.avatar_url" alt="" srcset="" width="300px" height="300px">
+    <table class="table w-50">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><strong>Name</strong></th> 
+            <th scope="col">{{userProfile.name || userProfile.login}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>           
+            <td><strong>Company </strong></td>
+            <td>{{userProfile.company || "NA"}}</td>
+          </tr>
+          <tr>           
+            <td><strong>Location </strong></td>
+            <td>{{userProfile.location || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Visit Profile </strong></td>
+            <td><a [href]="userProfile.html_url" target="_blank" class="btn btn-info">Profile</a></td>
+          </tr>
+          <tr>
+            <td><strong>Email </strong></td>
+            <td>{{userProfile.email || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Bio </strong></td>
+            <td>{{userProfile.bio || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Twitter Username </strong></td>
+            <td>{{userProfile.twitter_username || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Public Repos </strong></td>
+            <td>{{userProfile.public_repos || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Followers </strong></td>
+            <td>{{userProfile.followers || "NA"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Following </strong></td>
+            <td>{{userProfile.following || "NA"}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="carousel">
+        <button [routerLink]="['/followers', setUsers('PREV')]" class="btn btn-primary prev">Previous</button>
+        <button [routerLink]="['/followers', setUsers('NEXT')]" class="btn btn-primary next">Next</button>
+    </div>
+    
+</div>

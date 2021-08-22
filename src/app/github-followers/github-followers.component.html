@@ -1,0 +1,12 @@
+<div class="container followers-container w-100">
+    <h1 class="course-title">My Github Followers</h1>
+    <div class="row followers-list">
+        <div class="card followers-card col-4"  *ngFor="let follower of followers">
+            <img class="card-img-top" [src]="follower.avatarUrl" alt="Card image cap">
+            <div class="card-body">
+              <a [routerLink]="['/followers', follower.login]" class="card-title">{{follower.login}}</a> 
+              <a [href]="follower.htmlUrl" class="btn btn-primary">View Profile</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,13 @@
 <header class="row navbar navbar-expand-lg navbar-light bg-light">
-    <div class="col-9 header-content">
+    <div class="col-7 header-content">
         <i class="fab fa-angular icon" style="color: red; "></i>
         <h1>ANGULAR LEARNING</h1>
     </div>
-    <div class="col-3 header-links">
-        <a href="http://www.google.com">HOME</a>
-        <a href="http://www.google.com">PROFILE</a>
-        <a href="http://www.google.com">ABOUT</a>
+    <div class="col-5 header-links">
+        <a routerLinkActive="active" routerLink="" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
+        <a routerLinkActive="active" routerLink="/followers" [routerLinkActiveOptions]="{ exact: true }">FOLLOWERS</a>
+        <a routerLinkActive="active" routerLink="/courses" [routerLinkActiveOptions]="{ exact: true }">COURSES</a>
+        <a routerLinkActive="active" routerLink="/signup" [routerLinkActiveOptions]="{ exact: true }">SIGNUP</a>
+        <a routerLinkActive="active" routerLink="/changepassword" [routerLinkActiveOptions]="{ exact: true }">CHANGEPASSWORD</a>        
     </div>
 </header>

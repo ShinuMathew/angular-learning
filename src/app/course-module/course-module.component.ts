@@ -4,6 +4,7 @@ import { Course } from '../model/courses';
 import { style, state, animate, transition, trigger } from '@angular/animations';
 import { CourseService } from '../services/course.service';
 import { NgForm } from '@angular/forms';
+import { CourseTypeService } from '../services/course-type.service';
 
 @Component({
   selector: 'app-course-module',
@@ -27,7 +28,9 @@ export class CourseModuleComponent implements OnInit {
 
   public isUpdated: boolean;
   public courseDeleteSuccess: boolean;
+  public courseUpdateSuccess: boolean;
   public deletedCourse: Course;
+  public updatedCourse: Course;
   public courses: Course[];
   public showSuccess: boolean;
   public showFailed: boolean;
@@ -41,18 +44,17 @@ export class CourseModuleComponent implements OnInit {
   public courseTypeVal: string;
 
 
-  constructor(public courseService: CourseService) {
+  constructor(public courseService: CourseService, public courseTypeService: CourseTypeService) {
     this.isUpdated = false
     this.shouldDelete = false;
   }
   
   ngOnInit(): void {
     this.showUpdateModal = false;
-    this.courseService.getCourseTypes().subscribe(courses => this.courses = courses as Course[]);
+    this.courseTypeService.getCourseTypes().subscribe(courses => this.courses = courses as Course[]);
   }
 
-  notifyCourseDelete(course) {
-    console.log(`IsDeleted notification recieved ${JSON.stringify(course)}`)
+  notifyCourseDelete(course) {    
     this.courseDeleteSuccess = true;
     this.deletedCourse = course;
     setTimeout(() => {
@@ -60,18 +62,25 @@ export class CourseModuleComponent implements OnInit {
     }, 3000)
   }
 
+  notifyCourseUpdate(course) {
+    this.courseUpdateSuccess = true;
+    this.updatedCourse = course;
+    setTimeout(() => {
+      this.courseUpdateSuccess = false;
+    }, 3000)
+  }
+
   setFormUpdated(isUpdated) {
     this.isUpdated = isUpdated
     console.log("Updating list...")
-    this.courseListComponent.refreshCourse()
+    this.courseListComponent.loadCourses()
   }
 
   openUpdateModal(course) {
     this.showUpdateModal = true;
     this.courseIdVal = course.course_id
     this.courseNameVal = course.course_name
-    this.courseTypeVal = course.course_type
-    console.log(this.courseIdVal)
+    this.courseTypeVal = course.course_type    
   }
 
   updateCourse(courseForm) {
@@ -79,15 +88,12 @@ export class CourseModuleComponent implements OnInit {
       course_name: courseForm.value.courseName,
       course_type: courseForm.value.category.description,
       consent: courseForm.value.consent,
-    }
-    console.log(reqBody)
+    }    
     this.courseService.updateCourse(this.courseIdVal, reqBody)
       .subscribe(res => {
         this.showSuccess = true
-        setTimeout(() => {
-          this.showUpdateModal = false;
-          this.courseListComponent.refreshCourse()
-        }, 3000)
+        setTimeout(() => this.showUpdateModal = false, 3000)
+        this.courseListComponent.loadCourses()
       }, err => this.showFailed = true)
   }
 

@@ -37,6 +37,10 @@
 
 .header-links a:hover {
     font-size: 1.05rem;
-    color: red;
+    color: rgb(0, 76, 255);
     transition: ease-in 0.3s;
+}
+
+.header-links a[class=active] {
+    color: rgb(4, 248, 208);
 }
