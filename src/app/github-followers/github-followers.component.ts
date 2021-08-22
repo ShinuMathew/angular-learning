@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { GithubUsersComponent } from '../github-users/github-users.component';
 import { GithubFollowers } from '../model/github-followers';
 import { GithubFollowersService } from '../services/github-followers.service';
 
@@ -9,14 +10,15 @@ import { GithubFollowersService } from '../services/github-followers.service';
 })
 export class GithubFollowersComponent implements OnInit {
 
-  constructor(private githubFollowers: GithubFollowersService) { }
+  constructor(private githubFollowersService: GithubFollowersService) { }
+
+  @ViewChild(GithubUsersComponent) private githubUsersComponent : GithubUsersComponent;
 
   public followers : GithubFollowers[]
 
   ngOnInit(): void {
-    this.githubFollowers.getFollowers().subscribe(followers => {
+    this.githubFollowersService.getFollowers().subscribe(followers => {
       this.followers = followers;
-    });
+    });  
   }
-
 }

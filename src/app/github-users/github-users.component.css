@@ -2,5 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-self: space-between;
+    justify-content: space-between;
+}
+
+.user-profile img {
+    margin: 30px;
+}
+
+.user-profile .carousel {
+    margin: 30px;
+    width: 100%;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.next, .prev {
+    width: 100px;
 }

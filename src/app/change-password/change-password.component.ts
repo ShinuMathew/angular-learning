@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ChangePasswordValidator } from '../common/validators/change-password.validator';
 
 @Component({
@@ -14,7 +15,7 @@ export class ChangePasswordComponent {
   public changePasswordForm: FormGroup
   public passwordUpdateSuccess : boolean;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private router : Router) {
     this.passwordUpdateSuccess = false;
     this.changePasswordForm = fb.group({
       oldPassword: ['', Validators.required, ChangePasswordValidator.oldPasswordMatch],
@@ -47,6 +48,7 @@ export class ChangePasswordComponent {
     this.passwordUpdateSuccess = true
     setTimeout(() => {
       this.passwordUpdateSuccess = false
+      this.router.navigate(["/courses"])
     }, 4000)
   }
 }

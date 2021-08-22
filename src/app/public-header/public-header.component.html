@@ -4,10 +4,10 @@
         <h1>ANGULAR LEARNING</h1>
     </div>
     <div class="col-5 header-links">
-        <a routerLinkActive="active" routerLink="">HOME</a>
-        <a routerLinkActive="active" routerLink="/followers">FOLLOWERS</a>
-        <a routerLinkActive="active" routerLink="/courses">COURSES</a>
-        <a routerLinkActive="active" routerLink="/signup">SIGNUP</a>
-        <a routerLinkActive="active" routerLink="/changepassword">CHANGEPASSWORD</a>        
+        <a routerLinkActive="active" routerLink="" [routerLinkActiveOptions]="{ exact: true }">HOME</a>
+        <a routerLinkActive="active" routerLink="/followers" [routerLinkActiveOptions]="{ exact: true }">FOLLOWERS</a>
+        <a routerLinkActive="active" routerLink="/courses" [routerLinkActiveOptions]="{ exact: true }">COURSES</a>
+        <a routerLinkActive="active" routerLink="/signup" [routerLinkActiveOptions]="{ exact: true }">SIGNUP</a>
+        <a routerLinkActive="active" routerLink="/changepassword" [routerLinkActiveOptions]="{ exact: true }">CHANGEPASSWORD</a>        
     </div>
 </header>

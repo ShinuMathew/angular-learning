@@ -20,9 +20,9 @@ export class GithubFollowersService extends DataService {
   }
 
   private mapGithubFollowers(followers) {    
-    console.log(followers)
     let githubFollower: GithubFollowers[] = []
     followers.forEach(follower => githubFollower.push({
+      id: follower.id,
       avatarUrl: follower.avatar_url,
       followersUrl: follower.followers_url,
       htmlUrl: follower.html_url,
