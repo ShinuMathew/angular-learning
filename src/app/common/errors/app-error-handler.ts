@@ -5,6 +5,6 @@ export class AppErrorHandler implements ErrorHandler {
 
     handleError(error: any) {
         console.log(error);
-        alert(UNEXPECTED_ERROR.message)
+        // alert(UNEXPECTED_ERROR.message)
     }
 }
